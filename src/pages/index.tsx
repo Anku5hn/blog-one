@@ -2,7 +2,6 @@ import * as React from 'react';
 import Header from './components/Header'
 import { useFetchApiQuery } from '../redux/services/fetchService'
 import Link from 'next/link';
-
 export default function Home() {
   const { data, error, isLoading } = useFetchApiQuery();
   return (
