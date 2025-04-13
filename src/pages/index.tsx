@@ -1,115 +1,72 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import * as React from 'react';
+import Header from './components/Header'
+import { useFetchApiQuery } from '../redux/services/fetchService'
+import Link from 'next/link';
 
 export default function Home() {
+  const { data, error, isLoading } = useFetchApiQuery();
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <Header />
+      {isLoading && <p>Loading...</p>}
+      {error && <p className="text-red-500">something went wrong</p>}
+      {/*Desktop*/}
+      <div className="mt-[12vh] w-[100vw] h-[12vh] z-1 hidden md:flex lg:flex justify-center font-serif">
+        <div className="w-[90vw]">
+          <div className="flex items-end">
+            <h2 className="text-4xl font-semibold italic">Best Of The Week</h2>
+            <Link href="/all-posts" className="mx-2 italic"><p>See All Posts →</p></Link>
+          </div>
+          <div className=" w-full flex">
+            <div className="w-[calc(75%-10px)] mr-[10px] h-[calc(80vh-30px)] mt-[30px] bg-linear-to-r from-blue-400 to-blue-200 rounded-lg flex flex-col items-center">
+              <div className="w-5/6 flex flex-col">
+                <div className="self-start mt-10  h-10">
+                  <p className="text-white px-1 py-1  border-white rounded-r-full rounded-l-full border">Author: {data && data[0].id}</p>
+                </div>
+                <div className="flex bg-white rounded-md h-20">
+                  <h2 className=" font-semibold text-3xl">{data && data[0].title}</h2>
+                  
+                </div>
+                <p className="mt-2 bg-white rounded-md">{data && data[0].body}</p>
+                <Link href="/post/1" className="self-end bg-white rounded-r-full rounded-l-full px-1 py-1 mt-[35vh]">Read more →</Link>
+              </div>
+            </div>
+            <div className="w-[25%]">
+              <div className="h-[39vh] bg-[#B7D4D8] rounded-lg w-[100%] mb-3 flex justify-center">
+                <div className="w-5/6 mt-5 ">
+                    <p className="text-2xl">Become a writer</p>
+                    <p className="font-bold mt-5 text-2xl">Write for us</p>
+                    <p className="mt-5 text-2xl">See How It Works →</p>
+                    <p className="self-end text-right underline mt-[30%] text-lg"><Link href="/upload">Post Now</Link></p>
+                </div>
+              </div>
+              <div className="h-[39vh] bg-[#8C9F7B] rounded-lg w-[100%] flex justify-center flex-col items-center">
+                <p className="text-white font-bold text-3xl">Read More Blogs</p>
+                <Link href="all-posts" className="px-2 py-2 bg-white rounded-l-full rounded-r-full mt-10">See All Posts →</Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+      {/*Mobile*/}
+      <div className="md:hidden lg:hidden flex mt-[15vh] flex-col justify-center items-center">
+        <div className="w-5/6 bg-linear-to-r from-blue-400 to-blue-200 rounded-lg h-[40vh]">
+        <p className="text-white px-1 py-1 mx-1 my-2">Author: {data && data[0].id}</p>
+        <h2 className="bg-white rounded-md mx-1 font-semibold text-2xl">{data && data[0].title}</h2>
+        <p className="mt-2 bg-white rounded-md mx-1 mb-2">{data && data[0].body}</p>
+        <Link href="/post/1" className="bg-white mx-1 rounded-r-full rounded-l-full px-1 py-1">Read more →</Link>
+        </div>
+        <div className="w-5/6 bg-[#B7D4D8] mt-5 rounded-lg h-[40vh]">
+        <p className="text-2xl mx-1">Become a writer</p>
+                    <p className="font-bold mt-5 text-2xl mx-1">Write for us</p>
+                    <p className="mt-5 text-2xl mx-1">See How It Works →</p>
+                    <p className="self-end text-right underline mt-[30%] text-lg mx-1"><Link href="/upload">Post Now</Link></p>
+        </div>
+        <div className="w-5/6 bg-[#8C9F7B] mt-5 rounded-lg h-[40vh] flex justify-center flex-col items-center">
+        <p className="text-white font-bold text-3xl">Read More Blogs</p>
+        <Link href="all-posts" className="px-2 py-2 bg-white rounded-l-full rounded-r-full mt-10">See All Posts →</Link>
+        </div>
+      </div>
+    </>
   );
 }

@@ -1,4 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## HOW TO RUN THIS PROJECT LOCALLY
+1. Open this project in terminal
+2. navigate to the root directory with package.json file
+3. run the commant: npm install
+4. run the command: npm run dev
+
 
 ## Getting Started
 
