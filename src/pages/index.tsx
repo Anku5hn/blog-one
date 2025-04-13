@@ -52,15 +52,15 @@ export default function Home() {
       <div className="md:hidden lg:hidden flex mt-[15vh] flex-col justify-center items-center">
         <div className="w-5/6 bg-linear-to-r from-blue-400 to-blue-200 rounded-lg h-[40vh]">
         <p className="text-white px-1 py-1 mx-1 my-2">Author: {data && data[0].id}</p>
-        <h2 className="bg-white rounded-md mx-1 font-semibold text-2xl">{data && data[0].title}</h2>
+        <h2 className="bg-white rounded-md mx-1 font-semibold text-lg">{data && data[0].title}</h2>
         <p className="mt-2 bg-white rounded-md mx-1 mb-2">{data && data[0].body}</p>
         <Link href="/post/1" className="bg-white mx-1 rounded-r-full rounded-l-full px-1 py-1">Read more →</Link>
         </div>
         <div className="w-5/6 bg-[#B7D4D8] mt-5 rounded-lg h-[40vh]">
-        <p className="text-2xl mx-1">Become a writer</p>
-                    <p className="font-bold mt-5 text-2xl mx-1">Write for us</p>
-                    <p className="mt-5 text-2xl mx-1">See How It Works →</p>
-                    <p className="self-end text-right underline mt-[30%] text-lg mx-1"><Link href="/upload">Post Now</Link></p>
+        <p className="text-lg mx-1">Become a writer</p>
+                    <p className="font-bold mt-5 text-xl mx-1">Write for us</p>
+                    <p className="mt-5 text-xl mx-1">See How It Works →</p>
+                    <p className="underline mx-2 my-10"><Link href="/upload">Post Now  →</Link></p>
         </div>
         <div className="w-5/6 bg-[#8C9F7B] mt-5 rounded-lg h-[40vh] flex justify-center flex-col items-center">
         <p className="text-white font-bold text-3xl">Read More Blogs</p>
